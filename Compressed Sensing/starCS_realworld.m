@@ -1,6 +1,6 @@
 signal=input('Choose real-world signal to test: SI1899, SI1948, SI2141, SI1716, SX5 or SX224: ');
 
-if strcmp(signal,'SI1899') %(signal=='SI1899')
+if strcmp(signal,'SI1899')
     L=20349; a=19; b=21;
     [x_original,fs]=audioread('SI1899.wav');
 elseif strcmp(signal,'SI1948')
@@ -12,7 +12,7 @@ elseif strcmp(signal,'SI2141')
 elseif strcmp(signal,'SI1716')
     L=24633; a=23; b=21;
     [x_original,fs]=audioread('SI1716.wav');
-elseif strcmp(signal,'SX5') %(signal=='SX5')
+elseif strcmp(signal,'SX5')
     L=23205; a=17; b=13;
     [x_original,fs]=audioread('SX5.wav');
 elseif strcmp(signal,'SX224')
