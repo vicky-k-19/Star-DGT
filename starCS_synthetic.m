@@ -93,6 +93,7 @@ opts=[];
 opts.maxIts     = 3;
 opts.tol        = 1e-3;
 
+%Call the solvers
 [ x1, out1, optsOut1 ]=solver_sBPDN_W( A, W1, y, EPS, mu1, x0, z0, opts);
 [ x2, out2, optsOut2 ]=solver_sBPDN_W( A, W2, y, EPS, mu2, x0, z0, opts);
 [ x3, out3, optsOut3 ]=solver_sBPDN_W( A, W3, y, EPS, mu3, x0, z0, opts);
