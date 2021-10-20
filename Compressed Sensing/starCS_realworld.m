@@ -1,18 +1,31 @@
-signal=input('Choose synthetic signal to test: Cusp, Ramp or Sing: ');
+signal=input('Choose real-world signal to test: SI1899, SI1948, SI2141, SI1716, SX5 or SX224: ');
 
-if signal=='Cusp'
-    L=33; a=1; b=11;
-    x_original = makesig('Cusp',L)';
-elseif signal=='Ramp'
-    L=33; a=1; b=11;
-    x_original = makesig('Ramp',L)';
+if strcmp(signal,'SI1899') %(signal=='SI1899')
+    L=20349; a=19; b=21;
+    [x_original,fs]=audioread('SI1899.wav');
+elseif strcmp(signal,'SI1948')
+    L=24633; a=21; b=23;
+    [x_original,fs]=audioread('SI1948.wav');
+elseif strcmp(signal,'SI2141')
+    L=21735; a=21; b=23;
+    [x_original,fs]=audioread('SI2141.wav');
+elseif strcmp(signal,'SI1716')
+    L=24633; a=23; b=21;
+    [x_original,fs]=audioread('SI1716.wav');
+elseif strcmp(signal,'SX5') %(signal=='SX5')
+    L=23205; a=17; b=13;
+    [x_original,fs]=audioread('SX5.wav');
+elseif strcmp(signal,'SX224')
+    L=24633; a=23; b=21;
+    [x_original,fs]=audioread('SX224.wav');
 else
-    L=45; a=1; b=9;
-    x_original = makesig('Sing',L)';
+    fprint('False signal ID. Choose among SI1899, SI1948, SI2141, SX5, SX224 or SI1716. ');
 end
 
+x_original=x_original(1:L);
+
 %Creation of the measurements interval
-m=round(linspace(1,L,L));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+m=round(linspace(1,L,1000));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 
 %Creation of the star window vector. We divide it by its 2-norm (which preserves
 %the SDGF property) to speed up computations
@@ -47,10 +60,17 @@ W4=linop_handles([P4,L],W4f,W4t,'R2C');
 %average error
 iter=10;
 
-mu1=norm(y1,Inf);
-mu2=norm(y2,Inf);
-mu3=norm(y3,Inf);
-mu4=norm(y4,Inf);
+if strcmp(signal,'SI1716')
+    mu1=norm(y1,Inf);
+    mu2=norm(y2,Inf);
+    mu3=norm(y3,Inf);
+    mu4=norm(y4,Inf);
+else
+    mu1=1e-1*norm(y1,Inf);
+    mu2=1e-1*norm(y2,Inf);
+    mu3=1e-1*norm(y3,Inf);
+    mu4=1e-1*norm(y4,Inf);
+end
 
 meanerror1=zeros(iter,1);
 meanerror2=zeros(iter,1);
@@ -61,8 +81,6 @@ mm1=zeros(length(m),1);
 mm2=zeros(length(m),1);
 mm3=zeros(length(m),1);
 mm4=zeros(length(m),1);
-
-x0=sparse(L,1);
 
 for j=1:length(m)
 for i=1:iter
@@ -85,9 +103,10 @@ A = linop_handles([m(j),L], Af, At);
 %Calculation of noisy measurements 
 y_original=Af(x_original);
 sigma = 0.001;
-y     = y_original + sigma * randn(size(y_original));
-EPS = norm(y-y_original);
+y     = y_original + sigma * randn(size(b_original));
+EPS = norm(b-y_original);
 
+x0 = At(y_original);
 z0= [];
 opts=[];
 opts.maxIts     = 3;
@@ -120,4 +139,4 @@ ylabel('relative error');
 lgd = legend('star','Gaussian','Hann','Hamming','Location','southwest');
 title(lgd,'DGTs');
 legend('boxoff');
-fig=gcf; saveas(fig,'reconstructed synthetic signal.fig'); saveas(fig,'reconstructed synthetic signal.jpg');
+fig=gcf; saveas(fig,'reconstructed TIMIT signal.fig'); saveas(fig,'reconstructed TIMIT signal.jpg');
