@@ -1,4 +1,4 @@
-signal=input('Choose synthetic signal to test: Cusp, Ramp or Sing ');
+signal=input('Choose synthetic signal to test: Cusp, Ramp or Sing: ');
 
 if signal=='Cusp'
     L=33; a=1; b=11;
