@@ -103,8 +103,8 @@ A = linop_handles([m(j),L], Af, At);
 %Calculation of noisy measurements 
 y_original=Af(x_original);
 sigma = 0.001;
-y     = y_original + sigma * randn(size(b_original));
-EPS = norm(b-y_original);
+y     = y_original + sigma * randn(size(y_original));
+EPS = norm(y-y_original);
 
 x0 = At(y_original);
 z0= [];
