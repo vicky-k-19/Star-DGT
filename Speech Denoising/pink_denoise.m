@@ -63,12 +63,8 @@ y_original = x_original;
 EPS = norm(y-y_original);
         
 opts = [];
-opts.errFcn     = @(f,dual,primal) er(primal);
 opts.maxIts     = 3;
-opts.printEvery = 20;
 opts.tol        = 1e-4;
-opts.stopcrit   = 4;
-
 z0 = [];
 
 %Call the solvers
