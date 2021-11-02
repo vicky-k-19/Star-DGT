@@ -7,7 +7,7 @@ x_original=x_original(1:N);
 
 %Creation of the star window vector. We divide it by its 2-norm (which preserves
 %the SDGF property) to speed up computations
-g=star_window(L); g=real(g)/norm(g);
+g=star_window(N); g=real(g)/norm(g);
 
 %Production of the four frames with their corresponding operators 
 F1a=frame('dgtreal', g, a, N/b);
