@@ -1,4 +1,4 @@
-function v=sic2(L)
+function v=star_window(L)
 %This function implements the power iteration method, which 
 %yields the largest in magnitude eigenvalue and  corresponding eigenvector
 %of the Zauner unitary matrix. This eigenvector constitutes the star window vector.
