@@ -5,7 +5,7 @@ Code for implementation of the experiments of the articles (1) "Kouni, V., & Rau
 To run the scripts, the following dependencies are needed:
 a) packages `LTFAT` (http://ltfat.org/), `TFOCS` (http://cvxr.com/tfocs/) and `Wavelab` (https://statweb.stanford.edu/~wavelab/)
 
-b) TIMIT dataset (https://deepai.org/dataset/timit).
+b) `TIMIT` dataset (https://deepai.org/dataset/timit) for CS and `LibriSpeech` dataset (https://www.openslr.org/12) for denoising.
 
 ## Compressed Sensing
 
