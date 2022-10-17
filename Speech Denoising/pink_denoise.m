@@ -1,9 +1,11 @@
-%Denoising an example speech signal
+function pink_denoise(label, N, a, b)
 
-N=41769; a=21; b=17;
+%Denoising an example speech signal, contaminated by additive pink noise
 
-[x_original,fs]=audioread('2035-147960-0013.flac');
+[x_original,fs]=audioread(label);
+
 x_original=x_original(1:N);
+fprintf('Processing input file %s...\n', label);
 
 %Creation of the star window vector. We divide it by its 2-norm (which preserves
 %the SDGF property) to speed up computations
@@ -79,6 +81,8 @@ mse3(i)=immse(xp3,x_original);
 mse4(i)=immse(xp4,x_original);
 disp(i);
 end
+
+% Plot the reconstruction error as the std increases and save the figures
 
 figure(1); xlim([0.001 length(sigma)]);
 plot(sigma,mse1,'b--o',sigma,mse2,'r--*',sigma,mse3,'m--x',sigma,mse4,'k--d');
