@@ -12,8 +12,10 @@ b) `TIMIT` dataset (https://deepai.org/dataset/timit) for CS and `LibriSpeech` d
 
 ## Compressed Sensing
 
-The corresponding folder contains three MATLAB scripts. `star_window.m` calculates the desired star window vector. `starCS_synthetic.m` and `starCS_realworld.m` implement the experiments regarding analysis CS of synthetic and real-world data respectively, as written in article (1).
+The corresponding folder contains three MATLAB scripts. `star_window.m` calculates the desired star window vector. `starCS_synthetic.m` and `starCS_realworld.m` implement the experiments regarding analysis CS of synthetic and real-world data respectively, as written in [1].
 
 ## Speech Denoising
 
-The corresponding folder contains four MATLAB scripts. `star_window.m` calculates the desired star window vector. `gaussian_denoise.m`, `blue_denoise.m` and `pink_denoise.m` implement the experiments regarding robustness of star-DGT transform in the case of Gaussian, blue and pink noise respectively, as written in article (2).
+The corresponding folder contains four MATLAB scripts. `star_window.m` calculates the desired star window vector. `gaussian_denoise.m`, `blue_denoise.m` and `pink_denoise.m` implement the experiments regarding robustness of star-DGT transform in the case of Gaussian, blue and pink noise respectively, as written in [2]. Particularly, run:
+```noise_denoise('label.flac', N, a, b)```
+where `noise = gaussian`, `pink`or `blue`. The labels of the examined signals, along with corresponding N, a, b, can be found in Table 1 of [2]. So, for example, in order to denoise the signal with label=251-136532-0014, N=33915, a=51, b=19, contaminated by pink noise, one may run in the MATLAB prompt `pink_denoise('251-136532-0014.flac', 33915, 51, 19). 
