@@ -18,7 +18,7 @@ The corresponding folder contains three MATLAB scripts. `star_window.m` calculat
 
 The corresponding folder contains four MATLAB scripts. `star_window.m` calculates the desired star window vector. `gaussian_denoise.m`, `blue_denoise.m` and `pink_denoise.m` implement the experiments regarding robustness of star-DGT transform in the case of Gaussian, blue and pink noise respectively, as written in [2].
 
-# How to perform Gaussian/coloured denoising:
+### How to perform Gaussian/coloured denoising:
 
 Run in the MATLAB prompt
 
@@ -26,4 +26,4 @@ Run in the MATLAB prompt
 noise_denoise('label.flac', N, a, b)
 ```
 
-where `noise = gaussian`, `pink`or `blue`. The labels of the examined signals, along with corresponding N, a, b, can be found in Table 1 of [2]. For example, in order to denoise the signal with label=251-136532-0014, N=33915, a=51, b=19, contaminated by pink noise, run `pink_denoise('251-136532-0014.flac', 33915, 51, 19)`. 
+where `noise = gaussian`, `pink`or `blue`. The labels of the examined signals, along with corresponding N, a, b, can be found in Table 1 of [2]. For example, in order to denoise the signal with label=251-136532-0014, N=33915, a=51, b=19, contaminated by pink noise, run `pink_denoise('251-136532-0014.flac', 33915, 51, 19)`. The resulting figures are saved in .fig and .jpg forms.
