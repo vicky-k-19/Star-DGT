@@ -1,15 +1,23 @@
 %Denoising an example speech signal
 
-N=27531; a=19; b=23;
+label = input('Label = ');
 
-[x_original,fs]=audioread('8842-304647-0007.flac');
+[x_original,fs]=audioread(label);
+
+N=input('Give the artificial dimension L: ');
+a=input('a= ');
+b=input('b= ');
+
 x_original=x_original(1:N);
+fprintf('Processing input file %s...\n', label);
 
 %Creation of the star window vector. We divide it by its 2-norm (which preserves
 %the SDGF property) to speed up computations
+
 g=star_window(N); g=real(g)/norm(g);
 
 %Production of the four frames with their corresponding operators 
+
 F1a=frame('dgtreal', g, a, N/b);
 W1f= @(x) frana(F1a,x);
 W1t=@(x) frsyn(F1a,x);
@@ -49,6 +57,7 @@ x0=sparse(N,1);
 
 %Setup of measurement matrix. Since we perform denoising, A is simply the
 %identity
+
 A = linop_handles([N,N], @(x)x, @(x) x );
 
 for i=1:length(sigma)
@@ -76,6 +85,8 @@ mse3(i)=immse(xp3,x_original);
 mse4(i)=immse(xp4,x_original);
 disp(i);
 end
+
+% Plot the reconstruction error as the std increases and save the figures
 
 figure(1); xlim([0.001 length(sigma)]);
 plot(sigma,mse1,'b--o',sigma,mse2,'r--*',sigma,mse3,'m--x',sigma,mse4,'k--d');
