@@ -1,12 +1,8 @@
-%Denoising an example speech signal
+function gaussian_denoise(label, N, a, b)
 
-label = input('Label = ');
+%Denoising an example speech signal, contaminated by additive Gaussian noise
 
 [x_original,fs]=audioread(label);
-
-N=input('Give the artificial dimension L: ');
-a=input('a= ');
-b=input('b= ');
 
 x_original=x_original(1:N);
 fprintf('Processing input file %s...\n', label);
